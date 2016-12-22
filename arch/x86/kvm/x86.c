@@ -2633,6 +2633,7 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
 	case KVM_CAP_DISABLE_QUIRKS:
 	case KVM_CAP_SET_BOOT_CPU_ID:
  	case KVM_CAP_SPLIT_IRQCHIP:
+	case KVM_CAP_NATIVE_MWAIT:
 #ifdef CONFIG_KVM_DEVICE_ASSIGNMENT
 	case KVM_CAP_ASSIGN_DEV_IRQ:
 	case KVM_CAP_PCI_2_3:
@@ -3907,6 +3908,10 @@ split_irqchip_unlock:
 			kvm->arch.x2apic_broadcast_quirk_disabled = true;
 
 		r = 0;
+		break;
+	case KVM_CAP_NATIVE_MWAIT:
+		r = 0;
+		kvm->arch.native_mwait = true;
 		break;
 	default:
 		r = -EINVAL;

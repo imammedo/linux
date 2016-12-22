@@ -5200,6 +5200,11 @@ static u32 vmx_exec_control(struct vcpu_vmx *vmx)
 		exec_control |= CPU_BASED_CR3_STORE_EXITING |
 				CPU_BASED_CR3_LOAD_EXITING  |
 				CPU_BASED_INVLPG_EXITING;
+
+	if (vmx->vcpu.kvm->arch.native_mwait && enable_apicv)
+		exec_control &= ~(CPU_BASED_MWAIT_EXITING |
+				  CPU_BASED_MONITOR_EXITING);
+
 	return exec_control;
 }
 

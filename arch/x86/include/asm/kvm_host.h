@@ -802,6 +802,7 @@ struct kvm_arch {
 
 	bool x2apic_format;
 	bool x2apic_broadcast_quirk_disabled;
+	bool native_mwait;
 };
 
 struct kvm_vm_stat {
